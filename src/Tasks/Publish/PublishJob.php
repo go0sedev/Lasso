@@ -100,7 +100,7 @@ final class PublishJob extends BaseJob
 
                 $this->filesystem->put($bundlePath, json_encode($bundle));
 
-                $this->cloud->uploadFile($bundlePath, 'lasso-bundle.json');
+                $this->cloud->uploadFile($bundlePath, config('lasso.storage.prefix') . 'lasso-bundle.json');
             }
 
             // Done! Let's run some cleanup, and dispatch all the
@@ -138,7 +138,7 @@ final class PublishJob extends BaseJob
      */
     public function dispatchWebhooks(array $webhooks = []): void
     {
-        if (! count($webhooks)) {
+        if (!count($webhooks)) {
             return;
         }
 
